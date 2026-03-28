@@ -1,8 +1,16 @@
 name: CI/CD Pipeline
-on: { push: { branches: ["main"] } }
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - run: docker build -t demo-app .
+
+      - name: Build Docker image
+        run: docker build -t demo-app -f app/Dockerfile ./app
